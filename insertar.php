@@ -31,7 +31,7 @@
             <option value="5">5</option>
         </select><br/>
         
-        <label for="cp">Código Postal</label><br/>
+        <label for="cp">Precio</label><br/>
         <input style="text-transform: uppercase;" required type="text" name="cp"><br/>
         <label for="telefono">Telefono</label><br/>
         <input required type="number" name="telefono"><br/>
