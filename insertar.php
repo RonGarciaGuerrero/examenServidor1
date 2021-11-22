@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<h1>Insertar en la BBDD lindavista:</h1><br/>
+<h1>Insertar en la BBDD Lindavista:</h1><br/>
     <form action="bbddInsertar.php" method="post">
         <label for="tipo">Tipo de vivienda</label><br/>
         <select name="tipo" id="tipo">
@@ -43,8 +43,8 @@
         <input required type="number" name="tamanio" min="1"><br/>
 
         <label for="extras">Extras</label><br/>
-        <input type="checkbox" id="extra0" name="extras[]" value="N/A">
-        <label for="extra0">No aplica</label><br>
+        <!-- <input type="checkbox" id="extra0" name="extras[]" value="N/A">
+        <label for="extra0">No aplica</label><br> -->
         <input type="checkbox" id="extra1" name="extras[]" value="PISCINA">
         <label for="extra1">Piscina</label><br>
         <input type="checkbox" id="extra2" name="extras[]" value="JARDIN">
@@ -65,7 +65,9 @@
 </html>
 
 <!-- Pendiente:
+terminar la parte de borrar
+hacer en el campo de observaciones un text field
 controlar las excepciones, posibles errores en los campos 
 lo de sql injection ?
-antonio me dice que escoja un menu desplegable de escoger mas d euna opcion html para evitar que escojan no aplica y piscina 
+ 
 -->
