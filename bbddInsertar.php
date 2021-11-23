@@ -37,15 +37,23 @@
                 $extras.=$value.',';        
             }
         }else{
-            $extras = 'N/A';//si no se selecciona extra se añade como valor N/A, haciendolo asi evito errores de que el usuario escoja N/A y ademas 'Piscina'
+            $extras = 'N/A';//si no se selecciona extra se añade como valor N/A, haciendolo asi evito errores como que el usuario escoja N/A y ademas 'Piscina' a la vez
         }
-
+        //Control de errores
         $foto = $_FILES['foto']['name'];//esto devuelve el nombre del fichero
         if ($foto!=NULL ){//la persona ha subido una foto
             if(strtolower(substr($foto,-4))!='.png'&&strtolower(substr($foto,-4))!='.jpg'&&strtolower(substr($foto,-5))!='.jpeg'){
                 $errores[]= 'La foto debe ser jpg o png';
             }
         }
+        //aunque ya estan controlados en el formulario html lo vuelvo a validar aqui
+        if($precio<0){
+            $errores[]= 'El precio no puede ser menor a cero';
+        }
+        if($tamanio<0){
+            $errores[]= 'El tamanio no puede ser menor a cero';
+        }
+
 
         //https://phppot.com/php/mysql-blob-using-php/
         
@@ -77,14 +85,16 @@
             echo "Extras: ".$extras. "<br>";
             echo "Foto: ".$foto . "<br>";
             echo "Observaciones: ".$observaciones. "<br>";
-
-
-
         }
-        
-
         mysqli_close($conn);
     ?>
-    <a href="./insertar.php">Volver</a>
+    <ul>
+        <li>
+            <a href="insertar.php"> Ir a Insertar viviendas</a>
+        </li>
+        <li>
+            <a href="index.html">Volver al inicio</a>
+        </li>
+    </ul>
 </body>
 </html>

@@ -54,20 +54,24 @@
 
         <label for="foto">Foto</label><br/>
         <input type="file" name="foto" ><br/><br/>
+        <!-- //img  src='https://images.app.goo.gl/daZN2FmNDHCNf6Dr8	' -->
         <!-- //accept=".jpg,.jpeg,.png" OJO DESCOMENTARLO AL FINAL-->
         <label for="email">Observaciones</label><br/>
-        <input type="text" name="observaciones"><br/><br/>
-        
-        
+        <textarea name="observaciones" rows="10" cols="30"></textarea>
+        <br/><br/>
         
         <input type="submit">
     </form>
+    <ul>
+        <li>
+            <a href="index.html">Volver al inicio</a>
+        </li>
+    </ul>
 </body>
 </html>
 
 <!-- Pendiente:
 terminar la parte de borrar
-hacer en el campo de observaciones un text field
 controlar las excepciones, posibles errores en los campos 
 lo de sql injection ?
  
