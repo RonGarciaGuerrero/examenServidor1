@@ -53,9 +53,8 @@
         <label for="extra3">Garaje</label><br><br>
 
         <label for="foto">Foto</label><br/>
-        <input type="file" name="foto" ><br/><br/>
-        <!-- //img  src='https://images.app.goo.gl/daZN2FmNDHCNf6Dr8	' -->
-        <!-- //accept=".jpg,.jpeg,.png" OJO DESCOMENTARLO AL FINAL-->
+        <input type="file" name="foto" accept=".jpg,.jpeg,.png"><br/><br/>
+        
         <label for="email">Observaciones</label><br/>
         <textarea name="observaciones" rows="10" cols="30"></textarea>
         <br/><br/>

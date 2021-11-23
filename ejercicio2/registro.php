@@ -1,9 +1,24 @@
 <?php
-   ob_start();
-   session_start();
-?>
-
-
+        if(array_key_exists('password',$_POST)&&array_key_exists('usuario',$_POST)){
+            $usuario = $_POST["usuario"];
+            $pass = $_POST["password"];
+            $newURL = 'bienvenida.php';
+            $newURL2 = 'incorrecto.php';
+            if($usuario==$pass && !is_null($usuario)){
+                session_start();
+                $_SESSION['nombre']=$usuario;
+                header('Location: '.$newURL);
+                
+                if (!isset($_SESSION['count'])) {
+                $_SESSION['count'] = 0;
+                } else {
+                    $_SESSION['count']++;
+                }
+            }else{
+                header('Location: '.$newURL2);
+            }
+        }
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,51 +29,20 @@
     <!-- Autor: Ronald Garcia Guerrero -->
 </head>
 <body>
-    <form action="registro.php" method="POST" name="usuario"></form>
-       
-        <label for="usuario">Usuario</label>
-        
-        <input type="text" name="usuario" pattern="[a-zA-Z0-9]+" required><br/>
-        
-        <label for="pass">Contraseña</label>
-        
-        <input type="password" name="password" required><br/>
-        
-        <button type="submit" name="registrar">Registrar</button>
-    <?php
-        $usuario = $_POST["usuario"];
-        $pass = $_POST["password"];
-        $msg = '';
+    <form action="registro.php" method="POST" name="usuario">
+    <table>
+        <tr>
+            <td><label for="usuario">Usuario</label></td>
+            <td><input type="text" name="usuario" pattern="[a-zA-Z0-9]+" required><br/></td>
+        </tr>
+        <tr>
+            <td><label for="pass">Contraseña</label></td>
+            <td><input type="password" name="password" required><br/></td>
+        </tr>
 
-        if (isset($_POST['registrar']) && !empty($usuario) 
-               && !empty($pass)) {
-				
-               if ($usuario == $pass) {
-                  $_SESSION['valid'] = true;
-                  $_SESSION['timeout'] = time();
-                  $_SESSION['usuario'] = 'tutorialspoint';
-                  
-                  echo 'You have entered valid use name and password';
-               }else {
-                  $msg = 'Wrong username or password';
-               }
-            }
+    </table>
+        <input type="submit" name="iniciar" value="Iniciar sesión">
+    </form>
 
-
-
-        if($usuario==$pass){
-            session_start();
-            header()
-            if (!isset($_SESSION['count'])) {
-            $_SESSION['count'] = 0;
-          } else {
-            $_SESSION['count']++;
-          }
-
-
-        }
-    
-    
-    ?>
 </body>
 </html>

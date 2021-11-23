@@ -34,7 +34,7 @@
             $result = mysqli_query ($conn,"SELECT * FROM VIVIENDAS");
         }else{
             if (!is_null($TIPO)){
-                $result = mysqli_query ($conn,"SELECT * FROM VIVIENDAS WHERE TIPO = '$TIPO'");
+                $result = mysqli_query ($conn,"SELECT * FROM VIVIENDAS WHERE TIPO = '$TIPO'");//SE CREA UNA COLUMNA FALSA LLAMADA TIENE FOTO Y CUANDO TIENE FOTO VALE 1
             }
         }
         
@@ -46,9 +46,14 @@
                 printf("La selección devolvió %d filas.\n", mysqli_num_rows($result));
                 echo'<br/><br/>';
     
-                echo '<table><tr><th>ID</th><th>Tipo</th><th>Zona</th><th>Dirección</th><th>Dormitorios</th><th>Precio</th><th>Tamaño</th><th>Extras</th><th>Foto</th><th>Observaciones</th></tr>';//Para darle formato a los resultados los meto en una tabla
+                echo '<table><tr><th>ID</th><th>Tipo</th><th>Zona</th><th>Dirección</th><th>Dormitorios</th><th>Precio</th><th>Tamaño</th><th>Extras</th><th>Observaciones</th><th>Foto</th></tr>';//Para darle formato a los resultados los meto en una tabla
                 while($row = mysqli_fetch_array($result)){
-                    echo '<tr><td>'.$row["ID"].'</td><td>'.$row["TIPO"].'</td><td>'.$row["ZONA"].'</td><td>'.$row["DIRECCION"].'</td><td>'.$row["DORMITORIOS"].'</td><td>'.$row["PRECIO"].'</td><td>'.$row["TAMANIO"].'</td><td>'.$row["EXTRAS"].'</td><td>'.$row["FOTO"].'</td><td>'.$row["OBSERVACIONES"].'</td></tr>';
+                    echo '<tr><td>'.$row["ID"].'</td><td>'.$row["TIPO"].'</td><td>'.$row["ZONA"].'</td><td>'.$row["DIRECCION"].'</td><td>'.$row["DORMITORIOS"].'</td><td>'.$row["PRECIO"].'</td><td>'.$row["TAMANIO"].'</td><td>'.$row["EXTRAS"].'</td><td>'.$row["OBSERVACIONES"].'</td><td>';
+                    if(!is_null($row['FOTO'])){
+                        echo '<a href="mostrarImagen.php?id_vivienda='.$row["ID"].'"><img src="./fichero.png" height="30"/></a>';
+                    }
+                    
+                    echo '</td></tr>';
                 }
                 echo '</table>';
                 /* liberar el conjunto de resultados */
@@ -64,7 +69,7 @@
     ?>
     <ul>
         <li>
-            <a href="insertar.php"> Ir a Insertar viviendas</a>
+            <a href="consulta.php">Volver a consultar viviendas</a>
         </li>
         <li>
             <a href="index.html">Volver al inicio</a>

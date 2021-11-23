@@ -41,10 +41,14 @@
         }
         //Control de errores
         $foto = $_FILES['foto']['name'];//esto devuelve el nombre del fichero
+        $imgData = NULL;
         if ($foto!=NULL ){//la persona ha subido una foto
             if(strtolower(substr($foto,-4))!='.png'&&strtolower(substr($foto,-4))!='.jpg'&&strtolower(substr($foto,-5))!='.jpeg'){
                 $errores[]= 'La foto debe ser jpg o png';
+            }else if (is_uploaded_file($_FILES['foto']['tmp_name'])) {
+                $imgData = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
             }
+
         }
         //aunque ya estan controlados en el formulario html lo vuelvo a validar aqui
         if($precio<0){
@@ -67,7 +71,7 @@
             echo '</ul>';
         }else{
 
-            $sql = "INSERT INTO VIVIENDAS (TIPO,ZONA,DIRECCION,DORMITORIOS,PRECIO,TAMANIO,EXTRAS,FOTO,OBSERVACIONES) VALUES ('$tipo','$zona','$direccion','$dormitorios','$precio','$tamanio','$extras','$foto','$observaciones')"; //"insert into viviendas ..."
+            $sql = "INSERT INTO VIVIENDAS (TIPO,ZONA,DIRECCION,DORMITORIOS,PRECIO,TAMANIO,EXTRAS,FOTO,OBSERVACIONES) VALUES ('$tipo','$zona','$direccion','$dormitorios','$precio','$tamanio','$extras','$imgData','$observaciones')"; //"insert into viviendas ..."
 
             if (mysqli_query ($conn, $sql)){
                 echo "Guardado correctamente <br>";
