@@ -10,13 +10,16 @@
 <body>
     <h1>Consultar Viviendas Lindavista:</h1><br/>
     <label for="tipo">Consultar vivienda del tipo:</label><br/>
-    <select name="tipo" id="tipo">
-        <option value="TODOS">TODOS</option>
-        <option value="PISO">PISO</option>
-        <option value="ADOSADO">ADOSADO</option>
-        <option value="CHALET">CHALET</option>
-        <option value="CASA">CASA</option>
-    </select><br/>
-    <input type="submit" value="Actualizar">
+    <form action="bbddConsulta.php" method="GET">
+        <select name="TIPO" id="tipo">
+            <option value="TODOS">TODOS</option>
+            <option value="PISO">PISO</option>
+            <option value="ADOSADO">ADOSADO</option>
+            <option value="CHALET">CHALET</option>
+            <option value="CASA">CASA</option>
+        </select><br/>
+        <input type="submit" value="Actualizar">
+    </form>
+    
 </body>
 </html>

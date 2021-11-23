@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>Insertar en la BBDD Lindavista:</h1><br/>
-    <form action="bbddInsertar.php" method="post">
+    <form action="bbddInsertar.php" method="post" enctype="multipart/form-data">
         <label for="tipo">Tipo de vivienda</label><br/>
         <select name="tipo" id="tipo">
             <option value="PISO">PISO</option>
@@ -52,8 +52,9 @@
         <input type="checkbox" id="extra3" name="extras[]" value="GARAJE">
         <label for="extra3">Garaje</label><br><br>
 
-        <label for="foto">URL Foto</label><br/>
-        <input type="text" name="foto"><br/><br/>
+        <label for="foto">Foto</label><br/>
+        <input type="file" name="foto" ><br/><br/>
+        <!-- //accept=".jpg,.jpeg,.png" OJO DESCOMENTARLO AL FINAL-->
         <label for="email">Observaciones</label><br/>
         <input type="text" name="observaciones"><br/><br/>
         

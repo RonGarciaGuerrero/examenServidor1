@@ -30,6 +30,8 @@
         $tamanio = $_POST['tamanio'];
         $extras = '';
         
+        $errores=[];
+
         if(isset($_POST['extras'])){    //para poder seleccionar varias opciones de los extras
             foreach($_POST['extras'] as $value){
                 $extras.=$value.',';        
@@ -38,27 +40,48 @@
             $extras = 'N/A';//si no se selecciona extra se añade como valor N/A, haciendolo asi evito errores de que el usuario escoja N/A y ademas 'Piscina'
         }
 
-        $foto = $_POST['foto'];
-        $observaciones = $_POST['observaciones'];
-
-        $sql = "INSERT INTO VIVIENDAS (TIPO,ZONA,DIRECCION,DORMITORIOS,PRECIO,TAMANIO,EXTRAS,FOTO,OBSERVACIONES) VALUES ('$tipo','$zona','$direccion','$dormitorios','$precio','$tamanio','$extras','$foto','$observaciones')"; //"insert into viviendas ..."
-
-        if (mysqli_query ($conn, $sql)){
-        echo "Guardado correctamente <br>";
-        }else{
-        echo "Error guardando: " . $sql . "<br>" . mysqli_error($conn);
+        $foto = $_FILES['foto']['name'];//esto devuelve el nombre del fichero
+        if ($foto!=NULL ){//la persona ha subido una foto
+            if(strtolower(substr($foto,-4))!='.png'&&strtolower(substr($foto,-4))!='.jpg'&&strtolower(substr($foto,-5))!='.jpeg'){
+                $errores[]= 'La foto debe ser jpg o png';
+            }
         }
-        echo "Los valores guardados son: <br>";
-        echo "Tipo: ".$tipo. "<br>";
-        echo "Zona: ".$zona. "<br>";
-        echo "Dirección: ".$direccion. "<br>";
-        echo "Dormitorios: ".$dormitorios. "<br>";
-        echo "Precio: ".$precio.'€'. "<br>";
-        echo "Tamaño: ".$tamanio. "<br>";
+
+        //https://phppot.com/php/mysql-blob-using-php/
         
-        echo "Extras: ".$extras. "<br>";
-        echo "Foto: ".$foto . "<br>";
-        echo "Observaciones: ".$observaciones. "<br>";
+        $observaciones = $_POST['observaciones'];
+        if(count($errores)>0){
+            echo 'No se ha podido realizar la inserción debido a los siguientes errores: <br/>';//'hay errores'
+            echo '<ul>';
+            for($i=0;$i<count($errores);$i++){
+                echo '<li>'.$errores[$i].'</li>';
+            }
+            echo '</ul>';
+        }else{
+
+            $sql = "INSERT INTO VIVIENDAS (TIPO,ZONA,DIRECCION,DORMITORIOS,PRECIO,TAMANIO,EXTRAS,FOTO,OBSERVACIONES) VALUES ('$tipo','$zona','$direccion','$dormitorios','$precio','$tamanio','$extras','$foto','$observaciones')"; //"insert into viviendas ..."
+
+            if (mysqli_query ($conn, $sql)){
+                echo "Guardado correctamente <br>";
+            }else{
+                echo "Error guardando: " . $sql . "<br>" . mysqli_error($conn);
+            }
+            echo "Los valores guardados son: <br>";
+            echo "Tipo: ".$tipo. "<br>";
+            echo "Zona: ".$zona. "<br>";
+            echo "Dirección: ".$direccion. "<br>";
+            echo "Dormitorios: ".$dormitorios. "<br>";
+            echo "Precio: ".$precio.'€'. "<br>";
+            echo "Tamaño: ".$tamanio. "<br>";
+            
+            echo "Extras: ".$extras. "<br>";
+            echo "Foto: ".$foto . "<br>";
+            echo "Observaciones: ".$observaciones. "<br>";
+
+
+
+        }
+        
 
         mysqli_close($conn);
     ?>

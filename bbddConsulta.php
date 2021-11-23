@@ -10,7 +10,7 @@
 <body>
     <?php 
         // Conección
-        $conn = mysqli_connect("localhost","root","","directorio");
+        $conn = mysqli_connect("localhost","root","","lindavista");
         // Check connection
         if ($conn->connect_error) {
             die("Conexion fallida: ".$conn->connect_error);
@@ -18,13 +18,44 @@
             echo "conectado a la BBDD"."<br/>";
         }
         // asignacion de variables
-        $tipo = array_key_exists('tipo',$_GET) ? $_GET['tipo'] : NULL;  //"operador ternario" condicion ? valor_si_condicion_cierta : valor_si_condicion_falsa
+        $TIPO = array_key_exists('TIPO',$_GET) ? $_GET['TIPO'] : 'TODOS';  //"operador ternario" condicion ? valor_si_condicion_cierta : valor_si_condicion_falsa
+        //si viene el tipo en el GET, lo coge, sino muestro todos
         
-        $result = mysqli_query ($conn,"SELECT * FROM VIVIENDAS WHERE INSTR(UPPER(TIPO), '$TIPO') = 1");//lo intenté con ? pero no logré que funcionara;
+        echo $TIPO;
+        //$result = NULL;
         
-        printf("La selección devolvió %d filas.\n", mysqli_num_rows($result));
-        echo'<br/>';
-        echo '<table><tr><th>ID</th><th>NOMBRE</th><th>APELLIDOS</th><th>DIRECCIÓN</th><th>POBLACIÓN</th><th>CÓDIGO POSTAL</th><th>TELÉFONO</th><th>EMAIL</th></tr>';//Para darle formato a los resultados los meto en una tabla
+        if($TIPO == 'TODOS'){
+            $result = mysqli_query ($conn,"SELECT * FROM VIVIENDAS");
+        }else{
+            if (!is_null($TIPO)){
+                $result = mysqli_query ($conn,"SELECT * FROM VIVIENDAS WHERE TIPO = '$TIPO'");
+            }
+        }
+        
+        if(!$result){
+            echo "Ha ocurrido un error";
+            //echo mysqli_error($conn);
+        }else{
+            if (!mysqli_num_rows($result)==0){
+                printf("La selección devolvió %d filas.\n", mysqli_num_rows($result));
+                echo'<br/>';
+    
+                echo '<table><tr><th>ID</th><th>Tipo</th><th>Zona</th><th>Dirección</th><th>Dormitorios</th><th>Precio</th><th>Tamaño</th><th>Extras</th><th>Foto</th><th>Observaciones</th></tr>';//Para darle formato a los resultados los meto en una tabla
+                while($row = mysqli_fetch_array($result)){
+                    echo '<tr><td>'.$row["ID"].'</td><td>'.$row["TIPO"].'</td><td>'.$row["ZONA"].'</td><td>'.$row["DIRECCION"].'</td><td>'.$row["DORMITORIOS"].'</td><td>'.$row["PRECIO"].'</td><td>'.$row["TAMANIO"].'</td><td>'.$row["EXTRAS"].'</td><td>'.$row["FOTO"].'</td><td>'.$row["OBSERVACIONES"].'</td></tr>';
+                    echo'<br/>';
+                    echo'<br/>';
+                }
+                echo '</table>';
+                /* liberar el conjunto de resultados */
+                mysqli_free_result($result);
+            }else{
+                echo 'No se encontró ningún registro.';
+            }
+        }
+        
+
+        mysqli_close($conn);
 
     ?>
 </body>
