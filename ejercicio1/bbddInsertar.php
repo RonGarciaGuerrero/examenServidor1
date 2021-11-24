@@ -30,23 +30,24 @@
         $tamanio = $_POST['tamanio'];
         $extras = '';
         
-        $errores=[];
+        $errores=[];//se crea un array que contendrá los errores
 
-        if(isset($_POST['extras'])){    //para poder seleccionar varias opciones de los extras
+        if(isset($_POST['extras'])){ //para poder seleccionar varias opciones de los extras
             foreach($_POST['extras'] as $value){
                 $extras.=$value.',';        
             }
         }else{
-            $extras = 'N/A';//si no se selecciona extra se añade como valor N/A, haciendolo asi evito errores como que el usuario escoja N/A y ademas 'Piscina' a la vez
+            $extras = 'N/A';//si no se selecciona extra se añade como valor N/A, así evito errores como que el usuario escoja N/A y ademas 'Piscina'
         }
         //Control de errores
         $foto = $_FILES['foto']['name'];//esto devuelve el nombre del fichero
+        
         $imgData = NULL;
         if ($foto!=NULL ){//la persona ha subido una foto
-            if(strtolower(substr($foto,-4))!='.png'&&strtolower(substr($foto,-4))!='.jpg'&&strtolower(substr($foto,-5))!='.jpeg'){
+            if(strtolower(substr($foto,-4))!='.png'&&strtolower(substr($foto,-4))!='.jpg'&&strtolower(substr($foto,-5))!='.jpeg'){//compruebo 4 ultimos caracteres del nombre del fichero
                 $errores[]= 'La foto debe ser jpg o png';
             }else if (is_uploaded_file($_FILES['foto']['tmp_name'])) {
-                $imgData = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+                $imgData = addslashes(file_get_contents($_FILES['foto']['tmp_name']));//esto asigna a la variable los bytes de la foto
             }
 
         }
@@ -58,18 +59,18 @@
             $errores[]= 'El tamanio no puede ser menor a cero';
         }
 
-
+        //de aqui he sacado la info para insertar fotos en la BBDD
         //https://phppot.com/php/mysql-blob-using-php/
         
         $observaciones = $_POST['observaciones'];
-        if(count($errores)>0){
+        if(count($errores)>0){//si hay errores los muestro
             echo 'No se ha podido realizar la inserción debido a los siguientes errores: <br/>';//'hay errores'
             echo '<ul>';
             for($i=0;$i<count($errores);$i++){
                 echo '<li>'.$errores[$i].'</li>';
             }
             echo '</ul>';
-        }else{
+        }else{ //sino inserto en la tabla
 
             $sql = "INSERT INTO VIVIENDAS (TIPO,ZONA,DIRECCION,DORMITORIOS,PRECIO,TAMANIO,EXTRAS,FOTO,OBSERVACIONES) VALUES ('$tipo','$zona','$direccion','$dormitorios','$precio','$tamanio','$extras','$imgData','$observaciones')"; //"insert into viviendas ..."
 
@@ -85,7 +86,7 @@
             echo "Dormitorios: ".$dormitorios. "<br>";
             echo "Precio: ".$precio.'€'. "<br>";
             echo "Tamaño: ".$tamanio. "<br>";
-            
+    
             echo "Extras: ".$extras. "<br>";
             echo "Foto: ".$foto . "<br>";
             echo "Observaciones: ".$observaciones. "<br>";

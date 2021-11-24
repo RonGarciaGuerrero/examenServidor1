@@ -43,8 +43,6 @@
         <input required type="number" name="tamanio" min="1"><br/>
 
         <label for="extras">Extras</label><br/>
-        <!-- <input type="checkbox" id="extra0" name="extras[]" value="N/A">
-        <label for="extra0">No aplica</label><br> -->
         <input type="checkbox" id="extra1" name="extras[]" value="PISCINA">
         <label for="extra1">Piscina</label><br>
         <input type="checkbox" id="extra2" name="extras[]" value="JARDIN">
@@ -54,7 +52,7 @@
 
         <label for="foto">Foto</label><br/>
         <input type="file" name="foto" accept=".jpg,.jpeg,.png"><br/><br/>
-        
+        <!-- importante el type de la foto es file, validacion de formato en el formulario html -->
         <label for="email">Observaciones</label><br/>
         <textarea name="observaciones" rows="10" cols="30"></textarea>
         <br/><br/>
@@ -68,10 +66,3 @@
     </ul>
 </body>
 </html>
-
-<!-- Pendiente:
-terminar la parte de borrar
-controlar las excepciones, posibles errores en los campos 
-lo de sql injection ?
- 
--->
