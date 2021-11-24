@@ -27,14 +27,12 @@
         $TIPO = array_key_exists('TIPO',$_GET) ? $_GET['TIPO'] : 'TODOS';  //"operador ternario" condicion ? valor_si_condicion_cierta : valor_si_condicion_falsa
         //si viene el tipo en el GET, lo coge, sino muestro todos
         
-        //echo $TIPO;
-        //$result = NULL;
         
         if($TIPO == 'TODOS'){
             $result = mysqli_query ($conn,"SELECT * FROM VIVIENDAS");
         }else{
             if (!is_null($TIPO)){
-                $result = mysqli_query ($conn,"SELECT * FROM VIVIENDAS WHERE TIPO = '$TIPO'");//SE CREA UNA COLUMNA FALSA LLAMADA TIENE FOTO Y CUANDO TIENE FOTO VALE 1
+                $result = mysqli_query ($conn,"SELECT * FROM VIVIENDAS WHERE TIPO = '$TIPO'");
             }
         }
         
