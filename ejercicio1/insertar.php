@@ -10,6 +10,7 @@
 </head>
 <body>
 <h1>Insertar en la BBDD Lindavista:</h1><br/>
+<!-- //se usa multipart porque el formulario incyude elementos del tipo file -->
     <form action="bbddInsertar.php" method="post" enctype="multipart/form-data">
         <label for="tipo">Tipo de vivienda</label><br/>
         <select name="tipo" id="tipo">
