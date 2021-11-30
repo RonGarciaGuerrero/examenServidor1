@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Examen</title>
     <!-- Autor: Ronald Garcia Guerrero -->
+    <style>
+        body{
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size: smaller;
+        }
+        h1{
+            color: rgb(3,101,196)
+        }
+    </style>
 </head>
 <body>
 
@@ -50,6 +59,8 @@
                 $imgData = addslashes(file_get_contents($_FILES['foto']['tmp_name']));//esto asigna a la variable los bytes de la foto
             }
 
+        }else{
+            $imgData = NULL;
         }
         //aunque ya estan controlados en el formulario html lo vuelvo a validar aqui
         if($precio<0){
@@ -72,7 +83,7 @@
             echo '</ul>';
         }else{ //sino inserto en la tabla
 
-            $sql = "INSERT INTO VIVIENDAS (TIPO,ZONA,DIRECCION,DORMITORIOS,PRECIO,TAMANIO,EXTRAS,FOTO,OBSERVACIONES) VALUES ('$tipo','$zona','$direccion','$dormitorios','$precio','$tamanio','$extras','$imgData','$observaciones')"; //"insert into viviendas ..."
+            $sql = "INSERT INTO VIVIENDAS (TIPO,ZONA,DIRECCION,DORMITORIOS,PRECIO,TAMANIO,EXTRAS,FOTO,OBSERVACIONES) VALUES ('$tipo','$zona','$direccion','$dormitorios','$precio','$tamanio','$extras', ". ($imgData != null ? "'$imgData'" : "NULL").",'$observaciones')"; //"insert into viviendas ..."
 
             if (mysqli_query ($conn, $sql)){
                 echo "Guardado correctamente <br>";
