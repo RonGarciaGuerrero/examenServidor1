@@ -48,7 +48,7 @@
                 while($row = mysqli_fetch_array($result)){
                     echo '<tr><td>'.$row["ID"].'</td><td>'.$row["TIPO"].'</td><td>'.$row["ZONA"].'</td><td>'.$row["DIRECCION"].'</td><td>'.$row["DORMITORIOS"].'</td><td>'.$row["PRECIO"].'</td><td>'.$row["TAMANIO"].'</td><td>'.$row["EXTRAS"].'</td><td>'.$row["OBSERVACIONES"].'</td><td>';
                     if(!is_null($row['FOTO'])){
-                        echo '<a href="mostrarImagen.php?id_vivienda='.$row["ID"].'"><img src="./fichero.png" height="30"/></a>';
+                        echo '<a href="mostrarImagen.php?id_vivienda='.$row["ID"].'"><img src="./fichero.png" height="30"/></a>';//aqui se muestra el icono con el link a la foto
                     }
                     
                     echo '</td></tr>';
