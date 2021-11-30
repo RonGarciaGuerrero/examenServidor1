@@ -26,7 +26,7 @@
             die("Conexion fallida: ".$conn->connect_error);
         
         }else{
-            echo "conectado a la BBDD"."<br/>";
+            //echo "conectado a la BBDD"."<br/>";
         }
         //para generar el id he puesto en mysql admin al campo id le he dado a cambiar y he seleccionado el check de auto incremento AI, en el script de sql le he puesto el auto incremento despues del tipo
 
