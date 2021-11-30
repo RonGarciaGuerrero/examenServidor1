@@ -1,10 +1,10 @@
 <?php
-        if(array_key_exists('password',$_POST)&&array_key_exists('usuario',$_POST)){
-            $usuario = $_POST["usuario"];
+        if(array_key_exists('password',$_POST)&&array_key_exists('usuario',$_POST)){//se verifica si existen en el array
+            $usuario = $_POST["usuario"];//asigno valores
             $pass = $_POST["password"];
             $newURL = 'bienvenida.php';
             $newURL2 = 'incorrecto.php';
-            if($usuario==$pass && !is_null($usuario)){
+            if($usuario==$pass && !is_null($usuario)){//si el usuario y la contraseña son iguales y no nulos se inicia sesión redirigiendo a la pagina de bienvenida, sino redirige a la pagina incorrecto
                 session_start();
                 $_SESSION['nombre']=$usuario;
                 header('Location: '.$newURL);
