@@ -7,8 +7,22 @@
     <title>Examen</title>
     <style>
         table, th, td {
-            border: 1px solid black;
+            border: 1px solid white;
             border-collapse: collapse;
+        }
+        th{
+            background-color: rgb(3, 101, 196);
+            color: white;
+        }
+        td{
+            background-color: rgb(203, 203, 203);
+        }
+        body{
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size: smaller;
+        }
+        h1{
+            color: rgb(3, 101, 196);
         }
     </style>
     <!-- Autor: Ronald Garcia Guerrero -->
@@ -44,9 +58,9 @@
                 printf("La selección devolvió %d filas.\n", mysqli_num_rows($result));
                 echo'<br/><br/>';
     
-                echo '<table><tr><th>ID</th><th>Tipo</th><th>Zona</th><th>Dirección</th><th>Dormitorios</th><th>Precio</th><th>Tamaño</th><th>Extras</th><th>Observaciones</th><th>Foto</th></tr>';//Para darle formato a los resultados los meto en una tabla
+                echo '<table><tr><th>Tipo</th><th>Zona</th><th>Dirección</th><th>Dormitorios</th><th>Precio</th><th>Tamaño</th><th>Extras</th><th>Observaciones</th><th>Foto</th></tr>';//Para darle formato a los resultados los meto en una tabla
                 while($row = mysqli_fetch_array($result)){
-                    echo '<tr><td>'.$row["ID"].'</td><td>'.$row["TIPO"].'</td><td>'.$row["ZONA"].'</td><td>'.$row["DIRECCION"].'</td><td>'.$row["DORMITORIOS"].'</td><td>'.$row["PRECIO"].'</td><td>'.$row["TAMANIO"].'</td><td>'.$row["EXTRAS"].'</td><td>'.$row["OBSERVACIONES"].'</td><td>';
+                    echo '<tr><td>'.$row["TIPO"].'</td><td>'.$row["ZONA"].'</td><td>'.$row["DIRECCION"].'</td><td>'.$row["DORMITORIOS"].'</td><td>'.$row["PRECIO"].'</td><td>'.$row["TAMANIO"].'</td><td>'.$row["EXTRAS"].'</td><td>'.$row["OBSERVACIONES"].'</td><td>';
                     if(!is_null($row['FOTO'])){
                         echo '<a href="mostrarImagen.php?id_vivienda='.$row["ID"].'"><img src="./fichero.png" height="30"/></a>';//aqui se muestra el icono con el link a la foto
                     }
